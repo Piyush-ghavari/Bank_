@@ -2,12 +2,52 @@
 
 A simple banking system created using Python's Tkinter for GUI and MySQL for database storage. This application allows users to create accounts, log in, deposit, withdraw, and check account details.
 
-## Features:
-- **Login**: Users can log in with their name and pin.
-- **Create Account**: Users can create a new account by providing personal details.
-- **View Account Details**: Once logged in, users can view their personal information, balance, and total balance.
-- **Deposit and Withdraw**: Users can deposit or withdraw money from their account.
-- **Responsive Fullscreen**: The application is designed to run in fullscreen mode for a better user experience.
+## Features
+
+### 1. **Login Screen**
+   - Users can log in using their name and PIN.
+   - Upon successful login, users are redirected to their account details page.
+   - If the login credentials are incorrect, an error message is displayed.
+
+### 2. **Account Creation**
+   - Users can create a new account by providing the following details:
+     - Name
+     - Gender
+     - Age
+     - City
+     - State
+     - PIN
+   - A unique 11-digit account number is generated for each new account.
+   - The account information is stored in the MySQL database.
+
+### 3. **Account Details**
+   - After logging in, users can view their account details, including:
+     - Name
+     - Gender
+     - Age
+     - City
+     - State
+     - Balance
+     - Total Balance
+   - Users can perform the following operations:
+     - **Deposit**: Users can add funds to their account.
+     - **Withdraw**: Users can withdraw funds if sufficient balance is available.
+     - **Delete Account**: Users can delete their account permanently.
+
+### 4. **Transaction Handling**
+   - **Deposit**: Allows users to deposit money into their account, updating both the balance and total balance.
+   - **Withdraw**: Allows users to withdraw money from their account, with a check to ensure sufficient balance.
+
+### 5. **Account Deletion**
+   - Users can delete their account by confirming their action. Once deleted, the account information is removed from the database.
+
+### 6. **MySQL Database Integration**
+   - The application uses MySQL to store user data securely.
+   - The `details` table contains fields like `name`, `gender`, `age`, `city`, `state`, `pin`, `account_number`, `balance`, and `total_balance`.
+
+### 7. **User Interface**
+   - The GUI is built with `tkinter` and offers a full-screen window.
+   - The application has a blue color scheme for a visually clean experience.
 
 ## Requirements:
 1. **Python 3.x**: You need Python 3 or higher to run this application.
