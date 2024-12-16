@@ -123,7 +123,8 @@ CREATE DATABASE bank_users;
   ### Account Details Screen:
   
 
-  ![Screenshot 2024-12-13 212552](https://github.com/user-attachments/assets/b2bc2148-95fe-4aae-bcac-2b7c0eb838be)
+  ![Screenshot 2024-12-16 171644](https://github.com/user-attachments/assets/b6f97790-a815-441a-9b44-f4cc08e95177)
+
 
 
   ### Deposit Screen:
@@ -132,11 +133,24 @@ CREATE DATABASE bank_users;
   ![Screenshot 2024-12-13 212615](https://github.com/user-attachments/assets/1639b7dc-205e-447d-9b08-b979f3778a60)
 
 
+  
+
+
+  ![Screenshot 2024-12-16 171657](https://github.com/user-attachments/assets/3393390e-fa8e-48d8-af4d-cd0a9b089a44)
+
+
+
 
   ### Withdraw Screen:
   
 
   ![Screenshot 2024-12-13 212631](https://github.com/user-attachments/assets/585d1345-4b70-465a-92cb-e89722f9205e)
+
+
+
+
+  ![Screenshot 2024-12-16 171712](https://github.com/user-attachments/assets/82806bdf-596a-4316-b764-7e08decd74d8)
+
 
 
 
