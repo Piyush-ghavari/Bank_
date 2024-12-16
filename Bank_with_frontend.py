@@ -166,66 +166,90 @@ class BankApp:
         tk.Label(frame, text=f"Balance: {balance}", fg="white", bg="#3b5998", font=("Arial", 16)).grid(row=5, column=0, pady=10)
         tk.Label(frame, text=f"Total Balance: {total_balance}", fg="white", bg="#3b5998", font=("Arial", 16)).grid(row=6, column=0, pady=10)
 
-        # Deposit and Withdraw Buttons
-        self.btn_deposit = tk.Button(frame, text="Deposit", font=("Arial", 14), bg="#4CAF50", fg="white", command=self.deposit)
-        self.btn_deposit.grid(row=7, column=0, pady=20)
+        # Deposit and withdraw buttons
+        tk.Button(frame, text="Deposit", font=("Arial", 14), bg="#4CAF50", fg="white", command=self.deposit).grid(row=7, column=0, pady=10)
+        tk.Button(frame, text="Withdraw", font=("Arial", 14), bg="#FF6347", fg="white", command=self.withdraw).grid(row=8, column=0, pady=10)
+        
+        # Delete Account button
+        tk.Button(frame, text="Delete Account", font=("Arial", 14), bg="#FF4500", fg="white", command=self.delete_account).grid(row=9, column=0, pady=10)
 
-        self.btn_withdraw = tk.Button(frame, text="Withdraw", font=("Arial", 14), bg="#FF6347", fg="white", command=self.withdraw)
-        self.btn_withdraw.grid(row=8, column=0, pady=10)
-
-        self.btn_exit = tk.Button(frame, text="Exit", font=("Arial", 14), bg="#FF4500", fg="white", command=self.root.quit)
-        self.btn_exit.grid(row=9, column=0, pady=10)
+        # Back button to go to login
+        tk.Button(frame, text="Back to Login", font=("Arial", 14), bg="#4682B4", fg="white", command=self.show_login_screen).grid(row=10, column=0, pady=10)
 
     def deposit(self):
-        """Handles deposit functionality."""
-        money = self.get_transaction_amount("deposit")
-        if money > 0:
+        """Handle the deposit process."""
+        amount = self.get_transaction_amount("deposit")
+        if amount:
             current_balance = self.current_account[7]
-            current_total_balance = self.current_account[8]
-            account_number = self.current_account[6]
+            total_balance = self.current_account[8]
 
-            new_balance = current_balance + money
-            new_total_balance = current_total_balance + money
+            new_balance = current_balance + amount
+            new_total_balance = total_balance + amount
 
+            # Update in the database
             mycursor.execute(
-                "UPDATE details SET balance = %s, total_balance = %s WHERE account_number = %s;",
-                (new_balance, new_total_balance, account_number)
+                "UPDATE details SET balance = %s, total_balance = %s WHERE name = %s AND pin = %s",
+                (new_balance, new_total_balance, self.current_account[0], self.current_account[5])
             )
             connection.commit()
-            messagebox.showinfo("Deposit Successful", f"You have deposited {money}. New Balance: {new_balance}")
+
+            # Update the current account data
+            self.current_account = (self.current_account[0], self.current_account[1], self.current_account[2], self.current_account[3], self.current_account[4], self.current_account[5], self.current_account[6], new_balance, new_total_balance)
+
+            messagebox.showinfo("Deposit Successful", f"Deposited {amount} successfully!")
+            self.show_account_details()
 
     def withdraw(self):
-        """Handles withdrawal functionality."""
-        money = self.get_transaction_amount("withdraw")
-        if money > 0:
+        """Handle the withdraw process."""
+        amount = self.get_transaction_amount("withdraw")
+        if amount:
             current_balance = self.current_account[7]
-            if money <= current_balance:
-                current_total_balance = self.current_account[8]
-                account_number = self.current_account[6]
-
-                new_balance = current_balance - money
-                new_total_balance = current_total_balance - money
-
+            if current_balance >= amount:
+                new_balance = current_balance - amount
+                # Update in the database
                 mycursor.execute(
-                    "UPDATE details SET balance = %s, total_balance = %s WHERE account_number = %s;",
-                    (new_balance, new_total_balance, account_number)
+                    "UPDATE details SET balance = %s WHERE name = %s AND pin = %s",
+                    (new_balance, self.current_account[0], self.current_account[5])
                 )
                 connection.commit()
-                messagebox.showinfo("Withdrawal Successful", f"You have withdrawn {money}. New Balance: {new_balance}")
+
+                # Update the current account data
+                self.current_account = (self.current_account[0], self.current_account[1], self.current_account[2], self.current_account[3], self.current_account[4], self.current_account[5], self.current_account[6], new_balance, self.current_account[8])
+
+                messagebox.showinfo("Withdrawal Successful", f"Withdrew {amount} successfully!")
+                self.show_account_details()
             else:
-                messagebox.showerror("Insufficient Balance", "You do not have enough funds to withdraw this amount.")
+                messagebox.showerror("Insufficient Funds", "You do not have enough balance to withdraw this amount.")
+
+    def delete_account(self):
+        """Delete the user's account after confirming."""
+        name = self.entry_name.get()
+        pin = int(self.entry_pin.get())
+        
+        if name and pin:
+            # Ask for confirmation
+            confirm = messagebox.askyesno("Confirm Deletion", "Are you sure you want to delete your account?")
+            if confirm:
+                # Delete from the database
+                mycursor.execute("DELETE FROM details WHERE name = %s AND pin = %s", (name, pin))
+                connection.commit()
+
+                messagebox.showinfo("Account Deleted", "Your account has been deleted.")
+                self.show_login_screen()
 
     def get_transaction_amount(self, transaction_type):
-        """Gets the transaction amount for deposit or withdraw."""
-        amount = simpledialog.askinteger("Enter Amount", f"Enter the amount you want to {transaction_type}:")
-        return amount if amount is not None and amount > 0 else 0
+        """Prompt user for the transaction amount."""
+        amount = simpledialog.askfloat(f"{transaction_type.capitalize()} Amount", f"Enter amount to {transaction_type}:")
+        if amount and amount > 0:
+            return amount
+        return None
 
     def clear_screen(self):
-        """Clears the current screen."""
+        """Clear the current screen."""
         for widget in self.root.winfo_children():
             widget.destroy()
 
-# Start the GUI application
+# Main code to run the application
 root = tk.Tk()
 app = BankApp(root)
 root.mainloop()
