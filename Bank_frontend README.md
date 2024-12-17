@@ -122,21 +122,22 @@ CREATE DATABASE bank_users;
 
   ### Account Details Screen:
   
-
-  ![Screenshot 2024-12-16 171644](https://github.com/user-attachments/assets/b6f97790-a815-441a-9b44-f4cc08e95177)
-
+  
+![Screenshot 2024-12-17 170742](https://github.com/user-attachments/assets/9281a509-b2e9-4bd6-9f37-f0f5e8ab49c1)
 
 
   ### Deposit Screen:
   
 
-  ![Screenshot 2024-12-13 212615](https://github.com/user-attachments/assets/1639b7dc-205e-447d-9b08-b979f3778a60)
+
+![Screenshot 2024-12-17 170755](https://github.com/user-attachments/assets/e0712ef7-f35a-494c-961b-5b5a1f15bd05)
 
 
-  
 
 
-  ![Screenshot 2024-12-16 171657](https://github.com/user-attachments/assets/3393390e-fa8e-48d8-af4d-cd0a9b089a44)
+![Screenshot 2024-12-16 171657](https://github.com/user-attachments/assets/726408a5-59af-4c21-9662-e77fffaf7369)
+
+
 
 
 
@@ -144,7 +145,9 @@ CREATE DATABASE bank_users;
   ### Withdraw Screen:
   
 
-  ![Screenshot 2024-12-13 212631](https://github.com/user-attachments/assets/585d1345-4b70-465a-92cb-e89722f9205e)
+
+   ![Screenshot 2024-12-17 170807](https://github.com/user-attachments/assets/8a07fde7-3f9b-46bf-a720-39bfe4ba6a2c)
+
 
 
 
@@ -152,6 +155,10 @@ CREATE DATABASE bank_users;
   ![Screenshot 2024-12-16 171712](https://github.com/user-attachments/assets/82806bdf-596a-4316-b764-7e08decd74d8)
 
 
+### delete screen:
+
+
+   ![Screenshot 2024-12-17 170820](https://github.com/user-attachments/assets/5ac0532e-874f-4f0a-ad62-7c3f81be2f5b)
 
 
 ## Contributing:
